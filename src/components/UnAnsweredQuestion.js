@@ -10,9 +10,9 @@ import {
 } from 'semantic-ui-react'
 import {convert} from "../utils/helper";
 import LoaderComponent from './LoaderComponent'
+import AnsweredQuestion from './AnsweredQuestion'
 
-
-class QuestionPage extends Component {
+class UnAnsweredQuestion extends Component {
 
   state = {
     userOption: null,
@@ -38,11 +38,14 @@ class QuestionPage extends Component {
 
   render() {
     const {userOption} = this.state
-    const {question, author, authedUser} = this.props
+    const {question, author, currentUser} = this.props
     if (question === null) {
       return <LoaderComponent/>
     }
-
+    if( currentUser &&
+        Object.keys(currentUser.answers).indexOf(question.id) !== -1) {
+      return <AnsweredQuestion id={question.id} />
+    }
     return (
         <div>
           <Card style={{margin: 'auto', width: '70%'}}>
@@ -111,7 +114,7 @@ function mapStateToProps({users, questions, authedUser}, props) {
   const {id} = props.match.params
   const question = questions[id]
   return {
-    authedUser,
+    currentUser: users[authedUser],
     question: question
         ? question
         : null,
@@ -121,4 +124,4 @@ function mapStateToProps({users, questions, authedUser}, props) {
   }
 }
 
-export default connect(mapStateToProps)(QuestionPage)
+export default connect(mapStateToProps)(UnAnsweredQuestion)
