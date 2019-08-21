@@ -30,22 +30,22 @@ this is the second project of react Nanodegree on Udacity
 ### photo of site
 
 ###### Login page (page of shelves)
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/login.png)
 
 ###### Home page
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/home.png)
 
 ###### New Question page
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/new_question.png)
 
 ###### Answered Question page
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/answered_question.png)
 
 ###### UnAnswered Question page
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/unanswered_question.png)
 
 ###### Loader Board page
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/loader_board.png)
 
 ###### 404 page
-![alt text]()
+![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/404.png)
