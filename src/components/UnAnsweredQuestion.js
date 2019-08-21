@@ -11,6 +11,9 @@ import {
 import {convert} from "../utils/helper";
 import LoaderComponent from './LoaderComponent'
 import AnsweredQuestion from './AnsweredQuestion'
+import {handleAnswerQuestion} from "../actions/questions"
+import {handleAddAnswer} from "../actions/users"
+import {Redirect} from 'react-router-dom'
 
 class UnAnsweredQuestion extends Component {
 
@@ -24,23 +27,35 @@ class UnAnsweredQuestion extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("done")
-    // const { text } = this.state
-    // const { dispatch, id } = this.props
-    //
-    // dispatch(handleAddTweet(text, id))
-    //
-    // this.setState(() => ({
-    //   text: '',
-    //   toHome: id ? false : true,
-    // }))
+    const { userOption } = this.state
+    const { dispatch, question, currentUser } = this.props
+
+    dispatch(handleAnswerQuestion({
+      qid: question.id,
+      authedUser: currentUser.id,
+      answer: userOption
+    }))
+    dispatch(handleAddAnswer({
+      qid: question.id,
+      authedUser: currentUser.id,
+      answer: userOption
+    }))
+
+    this.setState(() => ({
+      userOption: null
+    }))
   }
 
   render() {
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     const {userOption} = this.state
     const {question, author, currentUser} = this.props
     if (question === null) {
-      return <LoaderComponent/>
+      return <Redirect to="/404"/>
     }
     if( currentUser &&
         Object.keys(currentUser.answers).indexOf(question.id) !== -1) {
@@ -121,6 +136,7 @@ function mapStateToProps({users, questions, authedUser}, props) {
     author: question
         ? users[question.author]
         : null,
+    authedUser
   }
 }
 

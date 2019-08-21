@@ -6,12 +6,16 @@ import {
   Feed,
 } from 'semantic-ui-react'
 import LoaderComponent from './LoaderComponent'
-
+import {Redirect} from 'react-router-dom'
 
 class AnsweredQuestion extends Component {
 
-
   render() {
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     const {question, author, currentUser} = this.props
     if (question === null || !currentUser) {
       return <LoaderComponent/>
@@ -79,6 +83,7 @@ function mapStateToProps({users, questions, authedUser}, {id}) {
     author: question
         ? users[question.author]
         : null,
+    authedUser
   }
 }
 

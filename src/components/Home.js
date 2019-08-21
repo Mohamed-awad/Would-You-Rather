@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import {Tab} from 'semantic-ui-react'
-
+import {Redirect} from 'react-router-dom'
 
 class Home extends Component {
 
   render() {
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     const { currentUser, questionIds } = this.props
     let answeredQuestions = []
     let unAnsweredQuestions = []
@@ -59,6 +64,7 @@ class Home extends Component {
 
 function mapStateToProps({ authedUser, users, questions }) {
   return {
+    authedUser,
     currentUser: users[authedUser],
     questionIds: Object.keys(questions)
         .sort((a, b) => questions[b].timestamp - questions[a].timestamp)

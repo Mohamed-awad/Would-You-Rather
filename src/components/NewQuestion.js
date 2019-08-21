@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {handleAddQuestion} from "../actions/questions";
+import {handleAddQuestion} from "../actions/questions"
 import {Redirect} from 'react-router-dom'
 import {
   Button,
@@ -50,6 +50,11 @@ class NewQuestion extends Component {
   }
 
   render() {
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     const {optionOne, optionTwo, toHome} = this.state
 
     if (toHome === true) {
@@ -98,5 +103,10 @@ class NewQuestion extends Component {
   }
 }
 
+function mapStateToProps({authedUser}) {
+  return {
+    authedUser
+  }
+}
 
-export default connect()(NewQuestion)
+export default connect(mapStateToProps)(NewQuestion)

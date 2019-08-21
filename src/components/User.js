@@ -3,10 +3,16 @@ import {connect} from 'react-redux'
 import {withRouter} from "react-router-dom";
 import {Card, Divider, Feed} from 'semantic-ui-react'
 import LoaderComponent from "./LoaderComponent";
+import {Redirect} from 'react-router-dom'
 
 class User extends Component {
 
   render() {
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     const {user} = this.props
     if (user === null) {
       return <LoaderComponent/>
@@ -55,7 +61,6 @@ class User extends Component {
                         borderRadius: '50%', width: '50%',
                         backgroundColor: 'teal', color: 'white', margin: 'auto'
                       }}>
-                        backgroundColor: 'teal', color: 'white', margin: 'auto'}}>
                         {(Object.keys(user.answers).length + user.questions.length)}
                       </h2>
                     </div>
@@ -69,12 +74,13 @@ class User extends Component {
   }
 }
 
-function mapStateToProps({users}, {id}) {
+function mapStateToProps({authedUser, users}, {id}) {
   const user = users[id]
   return {
     user: user
         ? user
         : null,
+    authedUser
   }
 }
 

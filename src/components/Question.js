@@ -1,18 +1,21 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {formatQuestion} from "../utils/_DATA";
-import {TiArrowBackOutline} from 'react-icons/ti/index'
-import {TiHeartOutline} from 'react-icons/ti/index'
-import {TiHeartFullOutline} from 'react-icons/ti/index'
 import {answerQuestion} from "../actions/questions";
 import {Link, withRouter} from "react-router-dom";
 import {Button, Card, Feed} from 'semantic-ui-react'
 import {convert} from "../utils/helper";
 import LoaderComponent from "./LoaderComponent";
+import {Redirect} from 'react-router-dom'
 
 class Question extends Component {
 
   render() {
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     const {question, author, authedUser} = this.props
     if (question === null) {
       return <LoaderComponent />

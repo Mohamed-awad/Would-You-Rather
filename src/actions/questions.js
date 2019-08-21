@@ -47,12 +47,11 @@ function answerQuestion ({ qid, authedUser, answer }) {
 export function handleAnswerQuestion(info) {
   return (dispatch) => {
     dispatch(answerQuestion(info))
-
     return _saveQuestionAnswer(info)
-        .catch((e)=> {
-          console.warn('Error in _saveQuestionAnswer', e)
-          dispatch(answerQuestion(info))
-          alert('the was an error answering the question. try again')
-        })
+      .catch((e)=> {
+        console.warn('Error in _saveQuestionAnswer', e)
+        dispatch(answerQuestion(info))
+        alert('the was an error answering the question. try again')
+      })
   }
 }
