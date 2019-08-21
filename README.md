@@ -27,9 +27,9 @@ this is the second project of react Nanodegree on Udacity
 * run the project `npm start`
 * open browser on this link `http://localhost:3000/`
 
-### photo of site
+### photos of site
 
-###### Login page (page of shelves)
+###### Login page
 ![alt text](https://github.com/Mohamed-awad/Would-You-Rather/blob/master/public/images/login.png)
 
 ###### Home page
