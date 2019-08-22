@@ -48,15 +48,16 @@ class UnAnsweredQuestion extends Component {
 
   render() {
 
-    if (this.props.authedUser === null) {
-      return <Redirect to='/login'/>
-    }
-
     const {userOption} = this.state
     const {question, author, currentUser} = this.props
     if (question === null) {
       return <Redirect to="/404"/>
     }
+
+    if (this.props.authedUser === null) {
+      return <Redirect to='/login'/>
+    }
+
     if( currentUser &&
         Object.keys(currentUser.answers).indexOf(question.id) !== -1) {
       return <AnsweredQuestion id={question.id} />
